@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negotiate Price - Hotel Booking System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/"><i class="fas fa-hotel me-2"></i>Hotel Booking System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-1">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item mx-1">
+                        <a class="nav-link" href="/rooms"><i class="fas fa-door-open me-1"></i> Rooms</a>
+                    </li>
+                    <li class="nav-item mx-1">
+                        <a class="nav-link" href="/bookings"><i class="fas fa-calendar-check me-1"></i> Bookings</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4 fade-in">
+        <div class="page-header mb-4">
+            <h2 class="fw-bold"><i class="fas fa-handshake me-2"></i>Negotiate Price</h2>
+            <p class="lead text-muted">Adjust pricing for special circumstances or guest requests</p>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-info-circle text-primary me-2 fs-4"></i>
+                    <h5 class="mb-0">Booking #<span th:text="${booking.bookingId}" class="fw-bold"></span></h5>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2 mb-3"><i class="fas fa-user-circle me-2"></i>Guest Information</h5>
+                        <div class="mb-2">
+                            <span class="text-muted">Guest Name:</span>
+                            <span class="fw-bold ms-2" th:text="${booking.customerName}"></span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="text-muted">Phone Number:</span>
+                            <span class="fw-bold ms-2" th:text="${booking.phoneNumber}"></span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="text-muted">Room:</span>
+                            <span class="badge bg-info text-dark ms-2" th:text="${booking.room != null ? booking.room.roomNumber + ' - ' + booking.room.type : 'N/A'}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2 mb-3"><i class="fas fa-calendar-alt me-2"></i>Stay Details</h5>
+                        <div class="mb-2">
+                            <span class="text-muted">Check-in:</span>
+                            <span class="badge bg-success-soft ms-2" th:text="${booking.checkIn}"></span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="text-muted">Check-out:</span>
+                            <span class="badge bg-danger-soft ms-2" th:text="${booking.checkOut}"></span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="text-muted">Duration:</span>
+                            <span class="fw-bold ms-2" th:text="${booking.stayDays} + ' day(s)'"></span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="text-muted">Standard Price:</span>
+                            <span class="fw-bold text-primary ms-2" th:text="${'₹' + booking.standardTotalPrice}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/bookings/negotiate/{id}(id=${booking.bookingId})}" method="post" class="mt-4">
+                    <div class="card bg-light mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-3"><i class="fas fa-tags me-2"></i>Price Negotiation</h5>
+                            <div class="mb-3">
+                                <label for="negotiatedPrice" class="form-label">Negotiated Total Price</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+                                    <input type="number" class="form-control form-control-lg" id="negotiatedPrice" name="negotiatedPrice" 
+                                           step="0.01" min="0" th:value="${booking.negotiatedPrice}" required>
+                                </div>
+                                <div class="form-text">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Enter the final negotiated price for the entire stay
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="/bookings" class="btn btn-outline-secondary">
+                            <i class="fas fa-times me-1"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i> Save Negotiated Price
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
