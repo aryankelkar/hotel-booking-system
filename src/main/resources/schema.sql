@@ -1,14 +1,13 @@
--- Create database if it doesn't exist
 CREATE DATABASE IF NOT EXISTS hotel_db;
 
--- Use the database
+
 USE hotel_db;
 
--- Drop tables if they exist to avoid conflicts
+
 DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS rooms;
 
--- Create rooms table
+
 CREATE TABLE rooms (
     room_id INT AUTO_INCREMENT PRIMARY KEY,
     room_number VARCHAR(10) NOT NULL,
@@ -17,7 +16,7 @@ CREATE TABLE rooms (
     status VARCHAR(20) NOT NULL DEFAULT 'Available'
 );
 
--- Create bookings table
+
 CREATE TABLE bookings (
     booking_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_name VARCHAR(100) NOT NULL,
@@ -31,7 +30,7 @@ CREATE TABLE bookings (
     FOREIGN KEY (room_id) REFERENCES rooms(room_id)
 );
 
--- Insert sample rooms with Indian room types and INR prices (3 rooms per floor)
+
 INSERT INTO rooms (room_number, type, price, status) VALUES
 ('101', 'Non AC Room', 1500.00, 'Available'),
 ('102', 'Non AC Room', 1500.00, 'Available'),

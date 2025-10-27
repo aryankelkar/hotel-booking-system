@@ -12,16 +12,13 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
-/**
- * Implementation of RoomRepository using Spring JDBC
- * Handles all database operations for Room entity
- */
+
 @Repository
 public class RoomRepositoryImpl implements RoomRepository {
 
     private final JdbcTemplate jdbcTemplate;
     
-    // Row mapper for converting result set to Room object
+  
     private final RowMapper<Room> roomRowMapper = (rs, rowNum) -> {
         Room room = new Room();
         room.setRoomId(rs.getInt("room_id"));
@@ -49,7 +46,7 @@ public class RoomRepositoryImpl implements RoomRepository {
         try {
             return jdbcTemplate.queryForObject(sql, roomRowMapper, id);
         } catch (Exception e) {
-            return null; // Return null if room not found
+            return null; 
         }
     }
 

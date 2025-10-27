@@ -7,10 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Implementation of RoomService
- * Provides business logic for room operations
- */
+
 @Service
 public class RoomServiceImpl implements RoomService {
 
@@ -33,7 +30,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public int addRoom(Room room) {
-        // Set default status as "Available" for new rooms
+        
         if (room.getStatus() == null || room.getStatus().isEmpty()) {
             room.setStatus("Available");
         }

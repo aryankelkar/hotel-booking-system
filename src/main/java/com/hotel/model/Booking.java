@@ -2,9 +2,7 @@ package com.hotel.model;
 
 import java.time.LocalDate;
 
-/**
- * Hotel room booking model
- */
+
 public class Booking {
 
     private int bookingId;
@@ -152,12 +150,11 @@ public class Booking {
     public double getTotalPrice() {
         if (room == null) return 0;
         
-        // If negotiated price is available, return it directly as it's already the total price
+        
         if (negotiatedPrice != null) {
             return negotiatedPrice;
         }
         
-        // Otherwise calculate based on standard room price
         long days = getStayDays();
         if (days == 0) days = 1;
         return room.getPrice() * days;

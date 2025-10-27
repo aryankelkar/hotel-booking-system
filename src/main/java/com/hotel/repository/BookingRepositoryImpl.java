@@ -14,9 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
-/**
- * JDBC implementation of BookingRepository
- */
+
 @Repository
 public class BookingRepositoryImpl implements BookingRepository {
 

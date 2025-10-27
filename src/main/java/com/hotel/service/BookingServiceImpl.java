@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Implementation of booking service operations
- */
+
 @Service
 public class BookingServiceImpl implements BookingService {
 
@@ -46,10 +44,10 @@ public class BookingServiceImpl implements BookingService {
             return false;
         }
         
-        // Update room status to Available
+        
         roomService.updateRoomStatus(booking.getRoomId(), "Available");
         
-        // Delete the booking
+       
         bookingRepository.deleteById(bookingId);
         return true;
     }

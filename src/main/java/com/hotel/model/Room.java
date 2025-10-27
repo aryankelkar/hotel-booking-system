@@ -1,21 +1,17 @@
 package com.hotel.model;
 
-/**
- * Room model class representing a hotel room
- * Contains room details such as id, room number, type, price, and availability status
- */
+
 public class Room {
     private int roomId;
     private String roomNumber;
     private String type;
     private double price;
-    private String status; // "Available" or "Booked"
+    private String status; 
 
-    // Default constructor
+   
     public Room() {
     }
 
-    // Parameterized constructor
     public Room(int roomId, String roomNumber, String type, double price, String status) {
         this.roomId = roomId;
         this.roomNumber = roomNumber;
@@ -24,7 +20,7 @@ public class Room {
         this.status = status;
     }
 
-    // Getters and Setters
+    
     public int getRoomId() {
         return roomId;
     }
