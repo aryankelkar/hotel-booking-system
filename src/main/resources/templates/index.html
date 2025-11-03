@@ -6,7 +6,7 @@
     <title>Hotel Booking System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -33,28 +33,50 @@
         </div>
     </nav>
 
-    <div class="container mt-5">
-        <div class="jumbotron">
-            <div class="row align-items-center mb-4">
+    <div class="container mt-5 page-container">
+        <div class="jumbotron fade-in">
+            <div class="row align-items-center mb-5">
                 <div class="col-md-12 text-center">
-                    <h1>Hotel Booking System</h1>
-                    <div class="mt-4">
-                        <a href="/rooms" class="btn btn-primary me-2"><i class="fas fa-search me-1"></i> Browse Rooms</a>
+                    <h1 class="display-4 mb-4">Hotel Booking System</h1>
+                    <p class="lead text-muted mb-4">Manage your hotel rooms and bookings with ease</p>
+                    <div class="mt-4 slide-in">
+                        <a href="/rooms" class="btn btn-primary me-3"><i class="fas fa-search me-1"></i> Browse Rooms</a>
                         <a href="/bookings/book" class="btn btn-success"><i class="fas fa-calendar-plus me-1"></i> Book Now</a>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="row mt-4">
-            <div class="col-md-4 mb-3">
-                <a href="/rooms" class="btn btn-primary w-100"><i class="fas fa-door-open me-1"></i> Rooms</a>
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card scale-in h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-door-open fa-3x mb-3 text-primary"></i>
+                        <h3 class="card-title">Rooms</h3>
+                        <p class="card-text">View and manage all available rooms</p>
+                        <a href="/rooms" class="btn btn-primary mt-3"><i class="fas fa-arrow-right me-1"></i> Go to Rooms</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <a href="/bookings/book" class="btn btn-success w-100"><i class="fas fa-plus me-1"></i> Book</a>
+            <div class="col-md-4 mb-4">
+                <div class="card scale-in h-100" style="animation-delay: 0.1s;">
+                    <div class="card-body text-center">
+                        <i class="fas fa-calendar-plus fa-3x mb-3 text-success"></i>
+                        <h3 class="card-title">Book Room</h3>
+                        <p class="card-text">Create a new booking for guests</p>
+                        <a href="/bookings/book" class="btn btn-success mt-3"><i class="fas fa-arrow-right me-1"></i> Book Now</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <a href="/bookings" class="btn btn-info w-100"><i class="fas fa-list me-1"></i> Bookings</a>
+            <div class="col-md-4 mb-4">
+                <div class="card scale-in h-100" style="animation-delay: 0.2s;">
+                    <div class="card-body text-center">
+                        <i class="fas fa-list fa-3x mb-3 text-info"></i>
+                        <h3 class="card-title">Bookings</h3>
+                        <p class="card-text">View and manage all current bookings</p>
+                        <a href="/bookings" class="btn btn-info mt-3"><i class="fas fa-arrow-right me-1"></i> View Bookings</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

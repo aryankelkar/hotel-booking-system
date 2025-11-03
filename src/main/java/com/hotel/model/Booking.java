@@ -15,9 +15,12 @@ public class Booking {
     private Double negotiatedPrice;
     private String status;
     private Room room;
+    private String paymentStatus;
+    private String paymentMethod;
 
     public Booking() {
         this.status = "Pending";
+        this.paymentStatus = "Awaiting Payment";
     }
 
     public Booking(int bookingId, String customerName, String contact, String phoneNumber,
@@ -31,6 +34,7 @@ public class Booking {
         this.roomId = roomId;
         this.negotiatedPrice = negotiatedPrice;
         this.status = "Pending";
+        this.paymentStatus = "Awaiting Payment";
     }
     
     public Booking(int bookingId, String customerName, String contact, String phoneNumber,
@@ -44,6 +48,23 @@ public class Booking {
         this.roomId = roomId;
         this.negotiatedPrice = negotiatedPrice;
         this.status = status;
+        this.paymentStatus = "Awaiting Payment";
+    }
+    
+    public Booking(int bookingId, String customerName, String contact, String phoneNumber,
+                   LocalDate checkIn, LocalDate checkOut, Integer roomId, Double negotiatedPrice, 
+                   String status, String paymentStatus, String paymentMethod) {
+        this.bookingId = bookingId;
+        this.customerName = customerName;
+        this.contact = contact;
+        this.phoneNumber = phoneNumber;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.roomId = roomId;
+        this.negotiatedPrice = negotiatedPrice;
+        this.status = status;
+        this.paymentStatus = paymentStatus;
+        this.paymentMethod = paymentMethod;
     }
 
     public int getBookingId() {
@@ -124,6 +145,22 @@ public class Booking {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+    
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     @Override

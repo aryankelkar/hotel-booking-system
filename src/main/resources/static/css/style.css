@@ -1,4 +1,4 @@
-/* Hotel Booking System - Minimalist UI Stylesheet */
+/* Hotel Booking System - Enhanced UI Stylesheet */
 
 :root {
   --primary-color: #3a5a80;
@@ -11,16 +11,46 @@
   --info-color: #03a9f4;
   --text-color: #333;
   --text-light: #6c757d;
-  --border-radius: 2px;
-  --box-shadow: none;
-  --transition: color 0.2s ease;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   color: var(--text-color);
   background-color: #f9f9f9;
+  transition: var(--transition);
+  letter-spacing: -0.01em;
+}
+
+/* Animation classes - Minimal and Professional */
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease;
+}
+
+.scale-in {
+  animation: scaleIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.98); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 /* Typography */
@@ -31,22 +61,48 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navbar styling */
 .navbar {
-  padding: 8px 0;
+  padding: 12px 0;
   background-color: var(--dark-color) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar-brand {
-  font-weight: 500;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.navbar-brand:hover {
+  transform: translateY(-2px);
 }
 
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.85);
   transition: var(--transition);
+  position: relative;
+  padding: 8px 16px;
+  margin: 0 4px;
+  border-radius: 4px;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link.active {
   color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-dark .navbar-nav .nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background-color: var(--accent-color);
+  border-radius: 3px;
 }
 
 /* Card styling */
@@ -54,26 +110,52 @@ h1, h2, h3, h4, h5, h6 {
   border: none;
   border-radius: var(--border-radius);
   height: 100%;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
 }
 
 .card-body {
-  padding: 1.25rem;
+  padding: 1.5rem;
 }
 
 .card-title {
-  font-weight: 500;
-  margin-bottom: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
 }
 
 /* Button styling */
 .btn {
   border-radius: var(--border-radius);
-  font-weight: 400;
-  padding: 8px 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+  transition: var(--transition);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn i {
   transition: var(--transition);
 }
 
-/* No duplicate badge styling needed as it's defined below */
+.btn:hover i {
+  transform: translateX(2px);
+}
 
 .btn-primary {
   background-color: var(--primary-color);
@@ -100,7 +182,71 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-info:hover {
-  background-color: #0286c2;
+  background-color: #0288d1;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Page container styling */
+.page-container {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.page-header {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--accent-color);
+  border-radius: 3px;
+}
+
+/* Table styling */
+.table {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.table thead th {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 500;
+  border: none;
+}
+
+/* Form styling */
+.form-control, .form-select {
+  border-radius: var(--border-radius);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ced4da;
+  transition: var(--transition);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(58, 90, 128, 0.25);
+}
+
+.input-group-text {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
 }
 
 .btn-warning {

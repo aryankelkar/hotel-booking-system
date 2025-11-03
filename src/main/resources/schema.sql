@@ -4,6 +4,8 @@ CREATE DATABASE IF NOT EXISTS hotel_db;
 USE hotel_db;
 
 
+-- Drop tables in dependency order to avoid FK issues
+DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS rooms;
 
@@ -27,7 +29,21 @@ CREATE TABLE bookings (
     room_id INT NOT NULL,
     negotiated_price DOUBLE,
     status VARCHAR(20) NOT NULL DEFAULT 'Pending',
+    payment_status VARCHAR(20) DEFAULT 'Awaiting Payment',
+    payment_method VARCHAR(20),
     FOREIGN KEY (room_id) REFERENCES rooms(room_id)
+);
+
+
+CREATE TABLE payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    booking_id INT NOT NULL,
+    payment_method VARCHAR(20) NOT NULL,
+    payment_status VARCHAR(20) NOT NULL,
+    amount DOUBLE NOT NULL,
+    transaction_details VARCHAR(255),
+    payment_date TIMESTAMP NOT NULL,
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE
 );
 
 

@@ -45,6 +45,18 @@ public class BookingRepositoryImpl implements BookingRepository {
             String status = rs.getString("status");
             booking.setStatus(status != null ? status : "Pending");
             
+            // Get payment fields
+            try {
+                String paymentStatus = rs.getString("payment_status");
+                booking.setPaymentStatus(paymentStatus != null ? paymentStatus : "Awaiting Payment");
+                
+                String paymentMethod = rs.getString("payment_method");
+                booking.setPaymentMethod(paymentMethod);
+            } catch (Exception e) {
+                // Handle case where columns don't exist yet
+                booking.setPaymentStatus("Awaiting Payment");
+            }
+            
             Room room = roomRepository.findById(booking.getRoomId());
             booking.setRoom(room);
             
@@ -71,7 +83,7 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public int save(Booking booking) {
         if (booking.getBookingId() > 0) {
-            String sql = "UPDATE bookings SET customer_name = ?, contact = ?, phone_number = ?, check_in = ?, check_out = ?, room_id = ?, negotiated_price = ?, status = ? WHERE booking_id = ?";
+            String sql = "UPDATE bookings SET customer_name = ?, contact = ?, phone_number = ?, check_in = ?, check_out = ?, room_id = ?, negotiated_price = ?, status = ?, payment_status = ?, payment_method = ? WHERE booking_id = ?";
             
             jdbcTemplate.update(sql,
                 booking.getCustomerName(),
@@ -82,12 +94,14 @@ public class BookingRepositoryImpl implements BookingRepository {
                 booking.getRoomId(),
                 booking.getNegotiatedPrice(),
                 booking.getStatus(),
+                booking.getPaymentStatus(),
+                booking.getPaymentMethod(),
                 booking.getBookingId()
             );
             
             return booking.getBookingId();
         } else {
-            String sql = "INSERT INTO bookings (customer_name, contact, phone_number, check_in, check_out, room_id, negotiated_price, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO bookings (customer_name, contact, phone_number, check_in, check_out, room_id, negotiated_price, status, payment_status, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             KeyHolder keyHolder = new GeneratedKeyHolder();
             
             jdbcTemplate.update(connection -> {
@@ -106,6 +120,8 @@ public class BookingRepositoryImpl implements BookingRepository {
                 }
                 
                 ps.setString(8, booking.getStatus() != null ? booking.getStatus() : "Pending");
+                ps.setString(9, booking.getPaymentStatus() != null ? booking.getPaymentStatus() : "Awaiting Payment");
+                ps.setString(10, booking.getPaymentMethod());
                 
                 return ps;
             }, keyHolder);
